@@ -1,0 +1,29 @@
+# Entorno virtual
+env/
+venv/
+
+# Archivos de base de datos SQLite
+*.sqlite3
+*.sqlite3-journal
+
+# Archivos compilados de Python
+*.pyc
+__pycache__/
+
+# Archivos de configuración local (por ejemplo, variables de entorno)
+.env
+*.env
+
+# Archivos de logs
+*.log
+
+# Archivos estáticos recolectados (si usas collectstatic)
+staticfiles/
+
+# Carpetas y archivos de editores y sistemas
+.vscode/
+.idea/
+.DS_Store
+
+# Migraciones (normalmente se incluyen, pero si quieres ignorarlas, puedes hacerlo)
+# migrations/
