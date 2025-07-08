@@ -15,6 +15,20 @@ import os
 
 
 
+ALLOWED_HOSTS = []
+
+# Si estás en Render, agrega automáticamente el hostname asignado
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# También puedes agregar explícitamente el dominio si lo sabes:
+ALLOWED_HOSTS.append('cea-9l7v.onrender.com')
+
+# Opcionalmente, para desarrollo local:
+ALLOWED_HOSTS.extend(['localhost', '127.0.0.1'])
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
