@@ -13,7 +13,7 @@ class Alergia(models.Model):
     descripcion = models.TextField()
 
 class Enfermedad(models.Model):
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
+    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE, related_name='enfermedades_medical')
     nombre = models.CharField(max_length=100)
     es_cronica = models.BooleanField(default=False)
     otros = models.TextField(blank=True)  # Esta línea debe ir aquí, dentro del modelo

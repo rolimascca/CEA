@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reporte Médico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .report {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+            max-width: 400px;
+        }
+        .report p {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporte Médico</h1>
+    <div class="report">
+        <p><strong>Total de estudiantes:</strong> <span id="total-estudiantes">Cargando...</span></p>
+        <p><strong>Estudiantes con enfermedades crónicas:</strong> <span id="con-enfermedades">Cargando...</span></p>
+    </div>
+
+    <script>
+        // Consumir la API /api/reportes/reporte-medico/ para mostrar datos dinámicos
+        fetch('/api/reportes/reporte-medico/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-estudiantes').textContent = data.total_estudiantes;
+                document.getElementById('con-enfermedades').textContent = data.con_enfermedades;
+            })
+            .catch(error => {
+                document.getElementById('total-estudiantes').textContent = 'Error al cargar';
+                document.getElementById('con-enfermedades').textContent = 'Error al cargar';
+                console.error('Error al obtener reporte:', error);
+            });
+    </script>
+</body>
+</html>

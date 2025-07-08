@@ -12,7 +12,7 @@ def reporte_medico(request):
         'total_estudiantes': len(estudiantes),
         'con_enfermedades': len([e for e in enfermedades if e['es_cronica']]),
     }
-    return Response(data)
+    return render(request, 'reportes/reporte_medico.html', context=data)
 
 def reportes_html(request):
     return render(request, 'reportes/index.html')

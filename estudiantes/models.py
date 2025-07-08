@@ -1,9 +1,16 @@
 from django.db import models
 
-# Create your models here.
 class Estudiante(models.Model):
     GENERO = [('V', 'Varón'), ('M', 'Mujer')]
-    
+    ENFERMEDADES = [
+        ('ninguna', 'Ninguna'),
+        ('asma', 'Asma'),
+        ('diabetes', 'Diabetes'),
+        ('alergia', 'Alergia'),
+        ('epilepsia', 'Epilepsia'),
+        ('cardiopatia', 'Cardiopatía'),
+        ('otra', 'Otra'),
+    ]
     nombres = models.CharField(max_length=100)
     apellidos = models.CharField(max_length=100)
     genero = models.CharField(max_length=1, choices=GENERO)
@@ -21,7 +28,7 @@ class Estudiante(models.Model):
     total_personas_hogar = models.IntegerField()
     
     salud = models.CharField(max_length=50)
-    enfermedad_actual = models.BooleanField(default=False)
+    enfermedad = models.CharField(max_length=20, choices=ENFERMEDADES, default='ninguna')
     enfermedad_desc = models.TextField(blank=True)
     atencion_psicologica = models.BooleanField(default=False)
     psicologico_desc = models.TextField(blank=True)
