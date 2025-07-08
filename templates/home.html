@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Escolar - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --secondary: #858796;
+            --success: #1cc88a;
+            --light: #f8f9fc;
+        }
+        .sidebar {
+            background: linear-gradient(180deg, var(--primary) 10%, #224abe 100%);
+            min-height: 100vh;
+        }
+        .card {
+            border-radius: 0.5rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            border-left: 0.25rem solid var(--primary);
+        }
+        .stat-card.success {
+            border-left-color: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar text-white p-0">
+                <div class="position-sticky pt-3">
+                    <div class="text-center py-4">
+                        <h4><i class="bi bi-book me-2"></i> Sistema Escolar</h4>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="#">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/api/estudiantes/">
+                                <i class="bi bi-people me-2"></i> Estudiantes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/api/medical/">
+                                <i class="bi bi-heart-pulse me-2"></i> Historial Médico
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/api/reportes/">
+                                <i class="bi bi-clipboard-data me-2"></i> Reportes
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4 bg-light">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                                            Estudiantes
+                                        </div>
+                                        <div class="h5 mb-0 fw-bold text-gray-800" id="total-students">0</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-people fs-1 text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card success h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs fw-bold text-success text-uppercase mb-1">
+                                            Con alergias
+                                        </div>
+                                        <div class="h5 mb-0 fw-bold text-gray-800" id="allergy-students">0</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-droplet fs-1 text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                                            Enfermedades crónicas
+                                        </div>
+                                        <div class="h5 mb-0 fw-bold text-gray-800" id="chronic-students">0</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-heart-pulse fs-1 text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card stat-card h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">
+                                            Reportes generados
+                                        </div>
+                                        <div class="h5 mb-0 fw-bold text-gray-800">12</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="bi bi-file-earmark-bar-graph fs-1 text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-clipboard-data me-1"></i>
+                                Distribución por género
+                            </div>
+                            <div class="card-body">
+                                <canvas id="genderChart" width="100%" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="bi bi-heart me-1"></i>
+                                Tipos de alergias
+                            </div>
+                            <div class="card-body">
+                                <canvas id="allergyChart" width="100%" height="50"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Students -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-table me-1"></i>
+                        Últimos estudiantes registrados
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="recentStudents">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Género</th>
+                                        <th>DNI</th>
+                                        <th>Salud</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentsTableBody">
+                                    <!-- Datos se llenarán con JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Obtener datos de la API
+        async function fetchDashboardData() {
+            try {
+                const [studentsRes, allergiesRes, diseasesRes] = await Promise.all([
+                    fetch('/api/estudiantes/'),
+                    fetch('/api/medical/alergias/'),
+                    fetch('/api/medical/enfermedades/?es_cronica=true')
+                ]);
+                
+                const students = await studentsRes.json();
+                const allergies = await allergiesRes.json();
+                const chronicDiseases = await diseasesRes.json();
+                
+                // Actualizar estadísticas
+                document.getElementById('total-students').textContent = students.length;
+                document.getElementById('allergy-students').textContent = allergies.length;
+                document.getElementById('chronic-students').textContent = chronicDiseases.length;
+                
+                // Preparar datos para gráficos
+                const genderCount = {
+                    'V': students.filter(s => s.genero === 'V').length,
+                    'M': students.filter(s => s.genero === 'M').length
+                };
+                
+                const allergyTypes = {};
+                allergies.forEach(a => {
+                    allergyTypes[a.tipo] = (allergyTypes[a.tipo] || 0) + 1;
+                });
+                
+                // Renderizar gráficos
+                renderGenderChart(genderCount);
+                renderAllergyChart(allergyTypes);
+                
+                // Llenar tabla de estudiantes
+                renderRecentStudents(students.slice(0, 5));
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+        
+        function renderGenderChart(data) {
+            const ctx = document.getElementById('genderChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Varón', 'Mujer'],
+                    datasets: [{
+                        data: [data['V'], data['M']],
+                        backgroundColor: ['#4e73df', '#1cc88a'],
+                        hoverBackgroundColor: ['#2e59d9', '#17a673']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderAllergyChart(data) {
+            const ctx = document.getElementById('allergyChart').getContext('2d');
+            const labels = Object.keys(data).map(key => {
+                const names = {
+                    'alimentos': 'Alimenticias',
+                    'medicamentos': 'Medicamentos',
+                    'ambiental': 'Ambientales'
+                };
+                return names[key] || key;
+            });
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Cantidad',
+                        data: Object.values(data),
+                        backgroundColor: '#36b9cc',
+                        borderColor: '#2c9faf',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderRecentStudents(students) {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                
+                // Mapear género a ícono
+                const genderIcon = student.genero === 'V' ? 
+                    '<i class="bi bi-gender-male text-primary"></i> Varón' : 
+                    '<i class="bi bi-gender-female text-danger"></i> Mujer';
+                
+                row.innerHTML = `
+                    <td>${student.apellidos}, ${student.nombres}</td>
+                    <td>${genderIcon}</td>
+                    <td>${student.dni}</td>
+                    <td>${student.salud}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-success ms-1">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Inicializar dashboard al cargar
+        document.addEventListener('DOMContentLoaded', fetchDashboardData);
+    </script>
+</body>
+</html>
