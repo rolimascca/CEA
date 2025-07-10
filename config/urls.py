@@ -19,11 +19,9 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),  # Nueva ruta raíz
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),  # Ruta raíz
     path('admin/', admin.site.urls),
-    path('api/estudiantes/', include('estudiantes.urls')),
-    path('api/medical/', include('medical.urls')),
-    path('api/reportes/', include('reportes.urls')),
+    path('api/medical/', include('medical.urls')),  # Rutas de la app medical
+    path('api/estudiantes/', include('estudiantes.urls')),  # Rutas de la app estudiantes
+    path('reportes/', include('medical.urls')),  # Incluye las rutas de reportes desde medical
 ]
-
-
